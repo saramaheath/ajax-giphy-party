@@ -13,9 +13,7 @@ async function getGif(keyword) {
     params: { q: `${keyword}`, api_key: "Nlgp4981igjH8Q1KLPDfqo0EyHEurTaI" },
   });
   console.log(gif.data.data);
-  let rawGif = gif.data.data[0].images.original.url;
-  console.log("getGif=", gif.data.data[0].embed_url);
-
+  let rawGif = gif.data.data[(Math.floor(Math.random() * gif.data.data.length))].images.original.url;
   addGif(rawGif);
 }
 /** adds gif to our gif storage in html */
@@ -24,13 +22,12 @@ function addGif(gif) {
 }
 /** On button click, we get a gif from giphy, calls getGif func */
 $button.on("click", function (e) {
-    e.preventDefault();
-    let keyword = $keyword.eq(0).val();
-    console.log(keyword, 'keyword');
+  e.preventDefault();
+  let keyword = $keyword.eq(0).val();
   getGif(keyword);
 });
 /** On button click, remove all current gifs from container */
 $delete.on("click", function (e) {
-    $container.empty();
+  $container.empty();
 })
 
